@@ -1,0 +1,17 @@
+{
+  "name": "apology-for-girlfriend",
+  "version": "1.0.0",
+  "description": "A premium, interactive, and beautiful apology website to say sorry in the most romantic way.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y http-server ./ -p 3000 -o",
+    "dev": "npx -y http-server ./ -p 3000 -o"
+  },
+  "keywords": [
+    "love",
+    "apology",
+    "interactive"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

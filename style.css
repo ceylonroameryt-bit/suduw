@@ -1,0 +1,1658 @@
+/* ==========================================================================
+   ROMANTIC APOLOGY WEBSITE — ULTRA-CUTE PASTEL REDESIGN
+   Soft Marshmallow White · Strawberry Pink & Sweet Honey · Bouncy Animations
+   ========================================================================== */
+
+:root {
+  --white:        #ffffff;
+  --cream-bg:     #fffbfc;
+  --marshmallow:  #fff4f7;
+  --sweet-pink:   #ff7a90;
+  --deep-pink:    #ff4d6d;
+  --soft-blush:   #ffccd5;
+  --honey-yellow: #ffd166;
+  --honey-dark:   #e5b026;
+  --lavender:     #c5b3e6;
+  --lavender-dark:#a08ad4;
+  --peach:        #ffab91;
+  --text-dark:    #3a2535;
+  --text-muted:   #83677b;
+  --shadow-cute:  0 12px 35px rgba(255, 122, 144, 0.08);
+  --shadow-deep:  0 18px 45px rgba(58, 37, 53, 0.07);
+  --shadow-button: 0 6px 18px rgba(255, 77, 109, 0.25);
+  --ease-cute:    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth:  cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ─── Global Reset & Scrollbars ────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--cream-bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.text-center { text-align: center; }
+
+/* Elegant custom scrollbar */
+.scrollbar-styled::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-styled::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-styled::-webkit-scrollbar-thumb {
+  background: var(--soft-blush);
+  border-radius: 10px;
+}
+.scrollbar-styled::-webkit-scrollbar-thumb:hover {
+  background: var(--sweet-pink);
+}
+
+/* ─── Background Elements ────────────────────────────────────────────────── */
+#heartCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.background-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pastel-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  animation: floatBlob 12s ease-in-out infinite alternate;
+}
+
+.blob-1 {
+  background: var(--soft-blush);
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  left: -120px;
+}
+
+.blob-2 {
+  background: #e8dff5; /* Dreamy light purple */
+  width: 520px;
+  height: 520px;
+  bottom: -150px;
+  right: -100px;
+  animation-delay: -3s;
+}
+
+.blob-3 {
+  background: #ffe5b4; /* Warm peach */
+  width: 360px;
+  height: 360px;
+  top: 35%;
+  left: 55%;
+  animation-delay: -6s;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, .btn {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.cursive {
+  font-family: 'Sacramento', cursive;
+  font-size: 2.5rem;
+  color: var(--sweet-pink);
+  line-height: 1;
+}
+
+.cursive-heading {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.8rem;
+  color: var(--sweet-pink);
+  text-shadow: 1px 1px 0 rgba(255, 122, 144, 0.05);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   STAGE 1: ENVELOPE OVERLAY
+   ══════════════════════════════════════════════════════════════════════════ */
+.envelope-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s var(--ease-smooth), visibility 1s;
+}
+
+.envelope-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Peeking Cat on Left */
+.peeking-cat-left {
+  position: absolute;
+  bottom: -5px;
+  left: 2rem;
+  width: 140px;
+  transform-origin: bottom center;
+  animation: peekLeftCat 4s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 102;
+}
+
+.envelope-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  z-index: 101;
+  width: 100%;
+  max-width: 450px;
+  padding: 0 1.5rem;
+}
+
+/* Mascot Header */
+.main-cat-art {
+  width: 180px;
+  height: 180px;
+  animation: floatMascot 4s ease-in-out infinite;
+}
+
+.envelope-instruction {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--deep-pink);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  animation: beatText 2s ease-in-out infinite;
+}
+
+/* 3D Envelope Shape */
+.envelope-container {
+  perspective: 1000px;
+  margin: 0.5rem 0;
+}
+
+.envelope {
+  position: relative;
+  width: 330px;
+  height: 210px;
+  background-color: var(--white);
+  border: 2px solid var(--soft-blush);
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow-deep);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease-cute);
+}
+
+.envelope:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: -2px; left: -2px;
+  width: 0; height: 0;
+  border-left: 165px solid transparent;
+  border-right: 167px solid transparent;
+  border-top: 115px solid #ffeef1;
+  transform-origin: top;
+  z-index: 5;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 4px 6px rgba(255, 122, 144, 0.12));
+}
+
+.envelope-pocket {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #fffbfd 0%, #ffeef2 100%);
+  border-radius: 0 0 16px 16px;
+  z-index: 4;
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 60%);
+}
+
+.letter-peek {
+  position: absolute;
+  top: 12px; left: 12px;
+  width: 306px; height: 186px;
+  background-color: var(--white);
+  border: 1.5px dashed var(--soft-blush);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(58, 37, 53, 0.03);
+  transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.peek-content {
+  text-align: center;
+  padding: 1.2rem;
+}
+
+.peek-content h3 {
+  color: var(--sweet-pink);
+  margin-bottom: 0.3rem;
+}
+
+.peek-content p {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Wax Seal Button */
+.wax-seal {
+  position: absolute;
+  top: 92px; left: calc(50% - 28px);
+  width: 56px; height: 56px;
+  background: radial-gradient(circle, var(--sweet-pink) 0%, var(--deep-pink) 100%);
+  border-radius: 50%;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(255, 77, 109, 0.4);
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-cute), opacity 0.4s;
+}
+
+.wax-seal:hover {
+  transform: scale(1.18) rotate(12deg);
+}
+
+.seal-inner {
+  width: 44px;
+  height: 44px;
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seal-glow {
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--soft-blush);
+  border-radius: 50%;
+  animation: sealPulse 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Open Envelope States */
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .letter-peek {
+  transform: translateY(-130px);
+  z-index: 3;
+}
+
+.envelope.open .wax-seal {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+}
+
+.paw-prints-row {
+  display: flex;
+  gap: 1.4rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.paw-icon {
+  width: 32px;
+  height: 32px;
+  animation: catPawWalk 2.5s infinite alternate;
+}
+.paw-prints-row svg:nth-child(2) { animation-delay: 0.4s; }
+.paw-prints-row svg:nth-child(3) { animation-delay: 0.8s; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   STAGE 2: MAIN WEBPAGE CONTAINER
+   ══════════════════════════════════════════════════════════════════════════ */
+.main-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 2.5rem 1.2rem 4rem;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.3s ease, transform 1.3s var(--ease-smooth);
+}
+
+.main-container.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Peeking Mascot Top-Right */
+.floating-mascot-tr {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  width: 90px;
+  height: 80px;
+  pointer-events: none;
+  animation: floatMascot 4s ease-in-out infinite;
+}
+
+.floating-kitten {
+  width: 100%;
+  height: 100%;
+}
+
+/* Header design */
+.romantic-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.header-mascot {
+  background-color: var(--white);
+  border: 2px solid var(--soft-blush);
+  border-radius: 50%;
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-cute);
+  animation: bouncingMascot 4.5s ease-in-out infinite;
+}
+
+.mascot-cat {
+  width: 68px;
+  height: 68px;
+}
+
+.elegant-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--text-dark) 20%, var(--sweet-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.romantic-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.heart-divider {
+  margin-top: 0.5rem;
+}
+
+.divider-svg {
+  width: min(280px, 85vw);
+  height: 24px;
+}
+
+/* ─── Adorable Cards (Glassmorphism + Marshmallow Outline) ────────────── */
+.glass-card {
+  background-color: var(--white);
+  border: 3px solid var(--soft-blush);
+  border-radius: 28px;
+  padding: 2.2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-cute);
+  transition: transform 0.4s var(--ease-cute), border-color 0.4s, box-shadow 0.4s;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sweet-pink);
+  box-shadow: var(--shadow-deep);
+}
+
+/* Grid Layout */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.22fr 1fr;
+  gap: 2.2rem;
+}
+
+.widgets-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+/* ─── Letter Card (Notebook Paper feel) ──────────────────────────────────── */
+.letter-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.card-corner-cat {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 50px;
+  height: 45px;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.handwritten-letter {
+  background-color: #fffdfd;
+  background-image: linear-gradient(rgba(255, 204, 213, 0.15) 1.5px, transparent 1.5px);
+  background-size: 100% 28px;
+  border: 2px dashed rgba(255, 122, 144, 0.2);
+  border-radius: 18px;
+  padding: 1.8rem;
+  font-size: 0.98rem;
+  line-height: 1.76;
+  color: var(--text-dark);
+  font-weight: 500;
+  max-height: 440px;
+  overflow-y: auto;
+}
+
+.handwritten-letter p {
+  margin-bottom: 1.2rem;
+}
+.handwritten-letter p:last-child {
+  margin-bottom: 0;
+}
+
+.salutation {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+}
+
+.sign-off {
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 1.6rem;
+  line-height: 1.5;
+}
+
+.signature {
+  font-family: 'Sacramento', cursive;
+  font-size: 2.8rem;
+  color: var(--sweet-pink);
+  display: block;
+  margin-top: 0.2rem;
+  line-height: 1;
+}
+
+/* ─── Jar Card (Candy Jar / Heart Collector) ─────────────────────────────── */
+.card-header-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.widget-icon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--sweet-pink);
+}
+
+.widget-title {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+}
+
+.widget-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Sweet clay jar */
+.jar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.4rem 0;
+}
+
+.glass-jar {
+  position: relative;
+  width: 120px;
+  height: 165px;
+  transition: transform 0.4s var(--ease-cute);
+}
+
+.jar-container:hover .glass-jar {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.jar-lid {
+  position: absolute;
+  top: 0; left: 16px;
+  width: 88px; height: 14px;
+  background: linear-gradient(to right, var(--deep-pink), var(--soft-blush), var(--deep-pink));
+  border-radius: 6px;
+  z-index: 10;
+  box-shadow: 0 3px 6px rgba(255, 77, 109, 0.25);
+}
+
+.jar-neck {
+  position: absolute;
+  top: 14px; left: 24px;
+  width: 72px; height: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border-left: 2px solid rgba(255, 122, 144, 0.25);
+  border-right: 2px solid rgba(255, 122, 144, 0.25);
+  z-index: 9;
+}
+
+.jar-body {
+  position: absolute;
+  top: 26px; left: 6px;
+  width: 108px; height: 139px;
+  background: radial-gradient(circle at 35% 25%, #ffffff 0%, #fff0f3 65%, #ffdce3 100%);
+  border: 3px solid rgba(255, 122, 144, 0.35);
+  border-radius: 20px 20px 28px 28px;
+  box-shadow: var(--shadow-cute), inset 0 8px 16px rgba(255, 255, 255, 0.9);
+  z-index: 8;
+  overflow: hidden;
+}
+
+.jar-glow-effect {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 122, 144, 0.2) 0%, transparent 65%);
+  animation: glowPulse 2.8s ease-in-out infinite;
+}
+
+.jar-heart {
+  position: absolute;
+  font-size: 1.4rem;
+  animation: jarFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(255, 122, 144, 0.2));
+}
+
+.jh-1 { top: 45px; left: 22px; animation-delay: 0s; font-size: 1.6rem; }
+.jh-2 { top: 75px; left: 62px; animation-delay: 0.6s; }
+.jh-3 { top: 95px; left: 16px; animation-delay: 1.2s; font-size: 1rem; }
+.jh-4 { top: 38px; left: 64px; animation-delay: 1.8s; font-size: 1.2rem; }
+.jh-5 { top: 105px; left: 45px; animation-delay: 0.3s; font-size: 1.5rem; }
+
+.jar-tap-prompt {
+  margin-top: 1rem;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--deep-pink);
+  transition: color 0.3s;
+}
+
+.jar-container:hover .jar-tap-prompt {
+  color: var(--lavender-dark);
+}
+
+/* ─── Quiz Card (Escape Button) ──────────────────────────────────────────── */
+.quiz-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  min-height: 210px;
+}
+
+.quiz-cat-deco {
+  width: 52px;
+  height: 48px;
+  margin-bottom: 0.4rem;
+  animation: wiggleCat 5s infinite;
+}
+
+.quiz-buttons {
+  display: flex;
+  gap: 1.4rem;
+  margin-top: 1.2rem;
+  justify-content: center;
+  min-height: 54px;
+  position: relative;
+  width: 100%;
+}
+
+/* ─── Custom Cute Buttons ────────────────────────────────────────────────── */
+.btn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s var(--ease-cute);
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, var(--sweet-pink) 0%, var(--deep-pink) 100%);
+  color: var(--white);
+  box-shadow: var(--shadow-button);
+  animation: heartPulse 1.8s ease-in-out infinite;
+}
+
+.btn-yes:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(255, 77, 109, 0.4);
+}
+
+.btn-no {
+  background-color: var(--white);
+  color: var(--text-muted);
+  border: 2px solid var(--soft-blush);
+  box-shadow: 0 4px 12px rgba(58, 37, 53, 0.04);
+}
+
+.btn-no:hover {
+  background-color: var(--marshmallow);
+  color: var(--sweet-pink);
+  border-color: var(--sweet-pink);
+  transform: scale(0.96);
+}
+
+/* ─── Apology Coupons Section (Tickets Design) ────────────────────────────── */
+.coupons-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.section-title {
+  font-size: 2.1rem;
+  margin-bottom: 0.1rem;
+  color: var(--sweet-pink);
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.coupons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.coupon-card {
+  background-color: var(--white);
+  border: 3px solid rgba(255, 122, 144, 0.25);
+  border-radius: 24px;
+  padding: 1.6rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 275px;
+  justify-content: space-between;
+  transition: transform 0.4s var(--ease-cute), box-shadow 0.4s, border-color 0.4s;
+  box-shadow: var(--shadow-cute);
+}
+
+.coupon-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--sweet-pink);
+  box-shadow: var(--shadow-deep);
+}
+
+/* Ticket Side Notch Cuts */
+.coupon-card::before,
+.coupon-card::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 10px);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--cream-bg);
+  z-index: 5;
+  transition: background-color 0.3s;
+}
+
+.coupon-card::before {
+  left: -11px;
+  border-right: 3px solid rgba(255, 122, 144, 0.25);
+}
+
+.coupon-card::after {
+  right: -11px;
+  border-left: 3px solid rgba(255, 122, 144, 0.25);
+}
+
+.coupon-card:hover::before { border-right-color: var(--sweet-pink); }
+.coupon-card:hover::after  { border-left-color: var(--sweet-pink); }
+
+.coupon-cat-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: -0.4rem;
+}
+
+.coupon-cat-icon svg {
+  animation: floatMascot 3s ease-in-out infinite;
+}
+
+.coupon-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--sweet-pink);
+  border-bottom: 2px dashed var(--soft-blush);
+  padding-bottom: 0.7rem;
+}
+
+.coupon-serial {
+  opacity: 0.75;
+}
+
+.coupon-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.coupon-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.coupon-details {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.btn-redeem {
+  background-color: transparent;
+  border: 2px solid var(--sweet-pink);
+  color: var(--sweet-pink);
+  padding: 0.65rem 1.1rem;
+  font-size: 0.84rem;
+  border-radius: 30px;
+  align-self: flex-start;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-cute);
+}
+
+.btn-redeem:hover {
+  background-color: var(--sweet-pink);
+  color: var(--white);
+  box-shadow: 0 4px 14px rgba(255, 122, 144, 0.3);
+  transform: scale(1.05);
+}
+
+/* Reduplicate Stamp seal */
+.coupon-stamp-seal {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 140px;
+  height: 60px;
+  border: 4px double #00d293;
+  border-radius: 12px;
+  color: #00d293;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-15deg) scale(3.5);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.96);
+}
+
+.coupon-card.redeemed .coupon-stamp-seal {
+  animation: stampImpact 0.45s var(--ease-cute) forwards;
+}
+
+.coupon-card.redeemed .btn-redeem {
+  display: none;
+}
+
+.coupon-card.redeemed {
+  border-color: #00d293;
+}
+.coupon-card.redeemed::before { border-right-color: #00d293; }
+.coupon-card.redeemed::after  { border-left-color: #00d293; }
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.site-footer {
+  text-align: center;
+  padding: 1.5rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.paw-trail {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.paw-foot {
+  width: 24px;
+  height: 24px;
+  opacity: 0.55;
+}
+.paw-foot.s { transform: scaleX(-1); }
+
+.footer-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MODALS & OVERLAYS
+   ══════════════════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: rgba(255, 254, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Love Note Modal */
+.love-note-modal {
+  width: 92%;
+  max-width: 410px;
+  transform: scale(0.8) rotate(-4deg);
+  transition: transform 0.5s var(--ease-cute);
+}
+
+.modal-overlay.open .love-note-modal {
+  transform: scale(1) rotate(0deg);
+}
+
+.note-paper {
+  background-color: var(--white);
+  border: 3px solid var(--soft-blush);
+  border-radius: 24px;
+  padding: 2.2rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-deep);
+}
+
+/* Vertical pink margin line for notebook paper feel */
+.note-paper::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 34px;
+  width: 2px;
+  background-color: rgba(255, 122, 144, 0.22);
+}
+
+.note-cat {
+  width: 76px;
+  margin: 0 auto 0.2rem;
+  display: block;
+}
+
+.note-heart-accent {
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
+  animation: heartPulse 1.4s infinite;
+}
+
+.note-salutation {
+  color: var(--sweet-pink);
+  font-size: 2.3rem;
+  margin-bottom: 0.8rem;
+  line-height: 1;
+}
+
+.note-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin-bottom: 1.6rem;
+  padding-left: 20px;
+}
+
+.btn-close-note {
+  background-color: var(--sweet-pink);
+  color: var(--white);
+  font-size: 0.9rem;
+  padding: 0.75rem 1.6rem;
+  box-shadow: 0 4px 12px rgba(255, 122, 144, 0.2);
+}
+
+.btn-close-note:hover {
+  background-color: var(--deep-pink);
+  transform: scale(1.05);
+}
+
+/* Success Modal Overlay */
+.success-modal-overlay {
+  background-color: rgba(255, 253, 254, 0.85);
+}
+
+.success-card {
+  width: 92%;
+  max-width: 470px;
+  background-color: var(--white);
+  border: 3px solid var(--sweet-pink);
+  border-radius: 30px;
+  padding: 2.5rem 2.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-deep);
+  transform: scale(0.78);
+  transition: transform 0.55s var(--ease-cute);
+}
+
+.modal-overlay.open .success-card {
+  transform: scale(1);
+}
+
+.success-cat {
+  width: 110px;
+  margin: 0 auto;
+  display: block;
+}
+
+.success-heart-blast {
+  font-size: 3.2rem;
+  animation: heartPulse 1s ease-in-out infinite;
+}
+
+.success-title {
+  color: var(--sweet-pink);
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.success-message {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.special-reward-card {
+  background-color: rgba(255, 122, 144, 0.05);
+  border: 2.5px dashed var(--soft-blush);
+  border-radius: 20px;
+  padding: 1.3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.reward-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--deep-pink);
+}
+
+.reward-desc {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.45;
+}
+
+.reward-code {
+  font-family: monospace;
+  font-size: 0.84rem;
+  color: var(--sweet-pink);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.btn-success-close {
+  background: linear-gradient(135deg, var(--sweet-pink) 0%, var(--deep-pink) 100%);
+  color: var(--white);
+  box-shadow: var(--shadow-button);
+}
+
+.btn-success-close:hover {
+  transform: scale(1.05);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   ══════════════════════════════════════════════════════════════════════════ */
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 30px) scale(1.15); }
+}
+
+@keyframes floatMascot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes bouncingMascot {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.04); }
+}
+
+@keyframes wiggleCat {
+  0%, 90%, 100% { transform: rotate(0); }
+  93%, 97% { transform: rotate(-8deg); }
+  95%, 98% { transform: rotate(8deg); }
+}
+
+@keyframes peekLeftCat {
+  0%, 100% { transform: translateY(15px) rotate(-10deg); }
+  50% { transform: translateY(0) rotate(5deg); }
+}
+
+@keyframes beatText {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.03); opacity: 1; }
+}
+
+@keyframes sealPulse {
+  0%, 100% { transform: scale(0.96); opacity: 0.8; }
+  50% { transform: scale(1.22); opacity: 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes jarFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(6deg); }
+}
+
+@keyframes stampImpact {
+  0%   { transform: rotate(-15deg) scale(3.5); opacity: 0; }
+  75%  { transform: rotate(-15deg) scale(0.95); opacity: 1; }
+  100% { transform: rotate(-15deg) scale(1); opacity: 1; }
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  15%      { transform: scale(1.06); }
+  30%      { transform: scale(1); }
+  45%      { transform: scale(1.1); }
+  70%      { transform: scale(1); }
+}
+
+@keyframes catPawWalk {
+  0% { transform: translateY(0) scale(1); opacity: 0.5; }
+  100% { transform: translateY(-4px) scale(1.08); opacity: 0.85; }
+}
+
+/* ─── Skincare, Cats & Hearts Catcher Game ────────────────────────────────── */
+.catcher-game-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.catcher-scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  background-color: var(--marshmallow);
+  padding: 0.85rem 1.4rem;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255, 122, 144, 0.12);
+  box-shadow: inset 0 3px 8px rgba(255, 122, 144, 0.02);
+}
+
+.score-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--white);
+  padding: 0.4rem 1.1rem;
+  border-radius: 50px;
+  border: 1.5px solid rgba(255, 122, 144, 0.15);
+  box-shadow: 0 4px 10px rgba(255, 122, 144, 0.04);
+}
+
+.score-label {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.74rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.score-val {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+}
+
+.score-target {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+#gameStatusText {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--sweet-pink);
+}
+
+/* Arena Screen border console */
+.game-arena-wrapper {
+  border: 3.5px dashed var(--soft-blush);
+  border-radius: 26px;
+  padding: 0.6rem;
+  background-color: var(--white);
+  box-shadow: var(--shadow-cute);
+  overflow: hidden;
+}
+
+.game-arena-container {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background-color: #fff9fb;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 122, 144, 0.08);
+}
+
+#catcherCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+/* Play screen overlay */
+.arena-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  transition: opacity 0.5s var(--ease-smooth), visibility 0.5s;
+}
+
+.arena-overlay.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 330px;
+}
+
+.overlay-icon {
+  font-size: 2.8rem;
+  animation: heartPulse 1.2s infinite;
+  display: block;
+}
+
+.overlay-content h3 {
+  font-size: 1.45rem;
+  color: var(--deep-pink);
+}
+
+.overlay-content p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.btn-game-start {
+  background: linear-gradient(135deg, var(--sweet-pink) 0%, var(--deep-pink) 100%);
+  color: var(--white);
+  box-shadow: var(--shadow-button);
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+}
+
+.btn-game-start:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
+}
+
+/* Touch Control buttons */
+.touch-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.4rem;
+  margin: 0.2rem 0;
+  width: 100%;
+}
+
+.btn-touch-arrow {
+  background-color: var(--white);
+  color: var(--text-dark);
+  border: 2px solid var(--soft-blush);
+  box-shadow: 0 4px 12px rgba(58, 37, 53, 0.03);
+  font-size: 0.94rem;
+  padding: 0.9rem 2.2rem;
+  flex: 1;
+  max-width: 180px;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn-touch-arrow:active {
+  background-color: var(--marshmallow);
+  border-color: var(--sweet-pink);
+  transform: scale(0.95);
+}
+
+/* ─── Victory Reward Wrapper & Lock Overlay ─────────────────────────────── */
+.victory-wrapper {
+  margin-top: 2.2rem;
+  border-top: 3px dashed rgba(255, 122, 144, 0.15);
+  padding-top: 2.2rem;
+  position: relative;
+}
+
+.victory-lock-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 15;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 40px rgba(255, 122, 144, 0.02);
+  transition: opacity 0.8s var(--ease-smooth), visibility 0.8s;
+  padding: 2rem;
+}
+
+.victory-lock-overlay.unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Unlocked Luxurious Apology Pass Card */
+.unlocked-pass-card {
+  background: radial-gradient(circle at 10% 10%, #ffffff 0%, #fffbfc 50%, #fff0f3 100%);
+  border: 4px double var(--sweet-pink);
+  border-radius: 28px;
+  padding: 2.5rem 2.2rem;
+  position: relative;
+  box-shadow: var(--shadow-deep), 0 0 25px rgba(255, 122, 144, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  transition: transform 0.4s var(--ease-cute);
+}
+
+.unlocked-pass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-deep), 0 0 35px rgba(255, 122, 144, 0.22);
+}
+
+/* Wiggling Gold Sparkles on corners */
+.pass-sparkle-1,
+.pass-sparkle-2 {
+  position: absolute;
+  font-size: 1.6rem;
+  color: var(--honey-yellow);
+  pointer-events: none;
+  animation: wigglingSparkle 2s ease infinite alternate;
+}
+.pass-sparkle-1 { top: 1.5rem; left: 1.5rem; }
+.pass-sparkle-2 { bottom: 1.5rem; right: 1.5rem; animation-delay: 1s; }
+
+.pass-cat-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: -0.6rem;
+}
+
+.pass-header {
+  text-align: center;
+  border-bottom: 2px dashed var(--soft-blush);
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pass-badge {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--deep-pink);
+}
+
+.pass-serial {
+  font-family: monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+
+.pass-body {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pass-title {
+  font-size: 1.35rem;
+  color: var(--text-dark);
+}
+
+.pass-description {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1.65;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 1.1rem;
+  border: 1.5px dashed rgba(255, 122, 144, 0.12);
+}
+
+.pass-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+/* Interactive stamp seal box */
+.pass-stamp-box {
+  position: relative;
+  border: 2px dashed rgba(255, 122, 144, 0.35);
+  border-radius: 12px;
+  width: 140px;
+  height: 64px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.pass-stamp-box:hover {
+  background-color: var(--marshmallow);
+  border-color: var(--sweet-pink);
+  transform: scale(1.03);
+}
+
+.stamp-box-prompt {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--sweet-pink);
+  animation: pulseText 1.8s infinite;
+}
+
+.pass-rubber-stamp {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 116px;
+  height: 48px;
+  border: 3.5px double var(--deep-pink);
+  border-radius: 6px;
+  color: var(--deep-pink);
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-10deg) scale(3);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.94);
+}
+
+.pass-stamp-box.redeemed .pass-rubber-stamp {
+  animation: stampImpact 0.42s var(--ease-cute) forwards;
+}
+
+.pass-stamp-box.redeemed .stamp-box-prompt {
+  display: none;
+}
+
+.pass-signature {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  gap: 0.15rem;
+}
+
+.signature-title {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.signature-val {
+  font-family: 'Sacramento', cursive;
+  font-size: 2.1rem;
+  color: var(--sweet-pink);
+  line-height: 1;
+}
+
+/* Wiggling stars keyframe */
+@keyframes wigglingSparkle {
+  0% { transform: scale(0.9) rotate(-10deg); opacity: 0.8; }
+  100% { transform: scale(1.15) rotate(15deg); opacity: 1; }
+}
+
+@keyframes padlockVibe {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.08) translateY(-6px); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOBILE & TABLET RESPONSIVENESS (FLAWLESS)
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .coupons-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .elegant-title {
+    font-size: 2.2rem;
+  }
+  .floating-mascot-tr {
+    display: none; /* hide floating cat to save mobile space */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 1.5rem 0.8rem 3rem;
+    gap: 1.8rem;
+  }
+  .glass-card {
+    padding: 1.4rem;
+    border-radius: 22px;
+  }
+  .handwritten-letter {
+    padding: 1.2rem;
+    font-size: 0.94rem;
+  }
+  
+  /* Envelope resizing for small mobile devices */
+  .envelope {
+    width: 290px;
+    height: 185px;
+  }
+  .envelope-flap {
+    border-left-width: 145px;
+    border-right-width: 147px;
+    border-top-width: 102px;
+  }
+  .letter-peek {
+    width: 266px;
+    height: 161px;
+  }
+  .wax-seal {
+    top: 78px;
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+  }
+  .seal-inner {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .peeking-cat-left {
+    display: none; /* Hide to prevent overlapping the card */
+  }
+  .elegant-title {
+    font-size: 1.85rem;
+  }
+  .romantic-subtitle {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+  
+  /* Responsive Game Overrides */
+  .game-console {
+    padding: 1rem;
+  }
+  .game-field {
+    height: 135px;
+  }
+  .chibi-character {
+    width: 64px;
+    height: 64px;
+    bottom: 6px;
+  }
+  .char-badge {
+    font-size: 0.54rem;
+    padding: 0.1rem 0.4rem;
+  }
+  .btn-game-send {
+    padding: 0.85rem 1.6rem;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+  .game-distance-val {
+    font-size: 1rem;
+  }
+  .bonus-card-lock {
+    padding: 1.2rem;
+  }
+  .lock-icon {
+    font-size: 2.2rem;
+  }
+}

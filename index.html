@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm So Sorry, My Love 😿💖</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Heart & Bubble Canvas Background -->
+  <canvas id="heartCanvas"></canvas>
+
+  <!-- Ambient Glowing Background Blobs -->
+  <div class="background-blobs">
+    <div class="pastel-blob blob-1"></div>
+    <div class="pastel-blob blob-2"></div>
+    <div class="pastel-blob blob-3"></div>
+  </div>
+
+  <!-- ========== STAGE 1: ENVELOPE ENTRANCE ========== -->
+  <div class="envelope-overlay" id="envelopeOverlay">
+    
+    <!-- Left Decorative Peeking Cat -->
+    <div class="peeking-cat-left">
+      <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 80 Q10 40 40 40 Q35 25 38 10 Q45 20 50 30 Q60 25 75 25 Q90 25 95 30 Q97 20 100 10 Q100 80 100 80" stroke="#ff7a90" stroke-width="3" fill="#fff" stroke-linejoin="round"/>
+        <path d="M40 25 L45 15 L50 22Z" fill="#ffccd5" stroke="#ff7a90" stroke-width="1.5"/>
+        <path d="M85 25 L90 15 L80 22Z" fill="#ffccd5" stroke="#ff7a90" stroke-width="1.5"/>
+        <ellipse cx="58" cy="48" rx="4" ry="5" fill="#3a2535"/>
+        <ellipse cx="82" cy="48" rx="4" ry="5" fill="#3a2535"/>
+        <circle cx="56" cy="46" r="1" fill="#fff"/>
+        <circle cx="80" cy="46" r="1" fill="#fff"/>
+        <path d="M68 53 L70 56 L72 53 Q70 51 68 53Z" fill="#ff7a90"/>
+        <path d="M64 58 Q70 63 76 58" stroke="#ff7a90" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="50" cy="55" rx="5" ry="2" fill="#ffb3c6" opacity="0.7"/>
+        <ellipse cx="90" cy="55" rx="5" ry="2" fill="#ffb3c6" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <div class="envelope-wrapper">
+      <div class="env-cat-header">
+        <!-- Floating Cute Cat holding a tiny heart -->
+        <svg class="main-cat-art" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Shadow -->
+          <ellipse cx="90" cy="165" rx="40" ry="8" fill="rgba(255, 122, 144, 0.15)"/>
+          <!-- Cat body -->
+          <ellipse cx="90" cy="115" rx="45" ry="40" stroke="#ff7a90" stroke-width="3" fill="#ffffff"/>
+          <!-- Cat head -->
+          <circle cx="90" cy="65" r="38" stroke="#ff7a90" stroke-width="3" fill="#ffffff"/>
+          <!-- Ears -->
+          <path d="M60 40 L45 10 L75 30Z" stroke="#ff7a90" stroke-width="3" fill="#ffffff" stroke-linejoin="round"/>
+          <path d="M120 40 L135 10 L105 30Z" stroke="#ff7a90" stroke-width="3" fill="#ffffff" stroke-linejoin="round"/>
+          <!-- Inner ears -->
+          <path d="M60 38 L52 18 L70 30Z" fill="#ffccd5"/>
+          <path d="M120 38 L128 18 L110 30Z" fill="#ffccd5"/>
+          <!-- Adorable eyes -->
+          <ellipse cx="76" cy="62" rx="5" ry="6" fill="#3a2535"/>
+          <ellipse cx="104" cy="62" rx="5" ry="6" fill="#3a2535"/>
+          <!-- Sparkles in eyes -->
+          <circle cx="74" cy="60" r="1.5" fill="#ffffff"/>
+          <circle cx="102" cy="60" r="1.5" fill="#ffffff"/>
+          <!-- Soft Blush Cheeks -->
+          <circle cx="66" cy="72" r="5" fill="#ffccd5"/>
+          <circle cx="114" cy="72" r="5" fill="#ffccd5"/>
+          <!-- Nose -->
+          <polygon points="88,70 92,70 90,73" fill="#ff7a90"/>
+          <!-- Cute mouth -->
+          <path d="M84 76 Q90 81 96 76" stroke="#ff7a90" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Whiskers -->
+          <path d="M45 68 L25 70 M45 74 L20 78 M45 80 L25 86" stroke="#ff7a90" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M135 68 L155 70 M135 74 L160 78 M135 80 L155 86" stroke="#ff7a90" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Tiny paws holding red heart -->
+          <path d="M90 118 C90 110 82 110 82 118 C82 125 90 130 90 130 C90 130 98 125 98 118 C98 110 90 110 90 118 Z" fill="#ff4d6d" stroke="#ff7a90" stroke-width="1.5"/>
+          <ellipse cx="74" cy="115" rx="8" ry="6" stroke="#ff7a90" stroke-width="2.5" fill="#ffffff"/>
+          <ellipse cx="106" cy="115" rx="8" ry="6" stroke="#ff7a90" stroke-width="2.5" fill="#ffffff"/>
+        </svg>
+      </div>
+
+      <div class="envelope-instruction">A sweet letter for you... tap to open 💖</div>
+
+      <div class="envelope-container">
+        <div class="envelope" id="envelope" onclick="openEnvelope()">
+          <div class="envelope-flap" id="envelopeFlap"></div>
+          <div class="envelope-pocket"></div>
+
+          <div class="letter-peek" id="letterPeek">
+            <div class="peek-content">
+              <h3 class="cursive">My absolute favorite...</h3>
+              <p>I have a tiny surprise for you inside 🐾💕</p>
+            </div>
+          </div>
+
+          <div class="wax-seal" id="waxSeal">
+            <div class="seal-inner">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff">
+                <path d="M12 21 C12 21 3 14 3 8.5 C3 5.4 5.4 3 8.5 3 C10.2 3 11.9 3.8 13 5.1 C14.1 3.8 15.8 3 17.5 3 C20.6 3 23 5.4 23 8.5 C23 14 12 21 12 21Z" stroke="#ff4d6d" stroke-width="1.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="seal-glow"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cute paw prints trailing under envelope -->
+      <div class="paw-prints-row">
+        <svg class="paw-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="28" r="8" fill="#ff7a90"/><circle cx="10" cy="16" r="4" fill="#ff7a90"/><circle cx="20" cy="12" r="4" fill="#ff7a90"/><circle cx="30" cy="16" r="4" fill="#ff7a90"/></svg>
+        <svg class="paw-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="28" r="8" fill="#c5b3e6"/><circle cx="10" cy="16" r="4" fill="#c5b3e6"/><circle cx="20" cy="12" r="4" fill="#c5b3e6"/><circle cx="30" cy="16" r="4" fill="#c5b3e6"/></svg>
+        <svg class="paw-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="28" r="8" fill="#ffd166"/><circle cx="10" cy="16" r="4" fill="#ffd166"/><circle cx="20" cy="12" r="4" fill="#ffd166"/><circle cx="30" cy="16" r="4" fill="#ffd166"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== STAGE 2: MAIN WEBSITE CONTENT ========== -->
+  <main class="main-container" id="mainContainer" style="display:none;">
+
+    <!-- Cute Floating Mascot Top-Right -->
+    <div class="floating-mascot-tr">
+      <svg class="floating-kitten" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="45" r="25" stroke="#ffab91" stroke-width="2.5" fill="#fff"/>
+        <path d="M30 25 L20 8 L38 20Z" stroke="#ffab91" stroke-width="2.5" fill="#fff" stroke-linejoin="round"/>
+        <path d="M70 25 L80 8 L62 20Z" stroke="#ffab91" stroke-width="2.5" fill="#fff" stroke-linejoin="round"/>
+        <ellipse cx="40" cy="42" rx="3" ry="4" fill="#3a2535"/>
+        <ellipse cx="60" cy="42" rx="3" ry="4" fill="#3a2535"/>
+        <circle cx="39" cy="40" r="1" fill="#fff"/>
+        <circle cx="59" cy="40" r="1" fill="#fff"/>
+        <path d="M47 48 Q50 51 53 48" stroke="#ffab91" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="32" cy="47" rx="3" ry="1.5" fill="#ffccd5"/>
+        <ellipse cx="68" cy="47" rx="3" ry="1.5" fill="#ffccd5"/>
+      </svg>
+    </div>
+
+    <!-- Header -->
+    <header class="romantic-header">
+      <div class="header-mascot">
+        <!-- SVG Cat with sweet heart-shaped blush cheeks -->
+        <svg viewBox="0 0 100 85" fill="none" class="mascot-cat" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="28" stroke="#ff7a90" stroke-width="3" fill="#ffffff"/>
+          <!-- Heart Ears -->
+          <path d="M30 30 C30 24 24 24 24 30 C24 36 30 40 30 40 C30 40 36 36 36 30 C36 24 30 24 30 30Z" fill="#ffccd5" stroke="#ff7a90" stroke-width="2"/>
+          <path d="M70 30 C70 24 64 24 64 30 C64 36 70 40 70 40 C70 40 76 36 76 30 C76 24 70 24 70 30Z" fill="#ffccd5" stroke="#ff7a90" stroke-width="2"/>
+          <!-- Sweet eyes -->
+          <circle cx="41" cy="48" r="4.5" fill="#3a2535"/>
+          <circle cx="59" cy="48" r="4.5" fill="#3a2535"/>
+          <circle cx="39.5" cy="46" r="1.5" fill="#ffffff"/>
+          <circle cx="57.5" cy="46" r="1.5" fill="#ffffff"/>
+          <!-- Heart-shaped nose -->
+          <path d="M50 54 C50 54 48 52 48 54 C48 56 50 58 50 58 C50 58 52 56 52 54 C52 52 50 52 50 54Z" fill="#ff4d6d"/>
+          <!-- Happy mouth -->
+          <path d="M44 58 Q50 63 56 58" stroke="#ff7a90" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="34" cy="54" r="3" fill="#ffccd5" opacity="0.8"/>
+          <circle cx="66" cy="54" r="3" fill="#ffccd5" opacity="0.8"/>
+        </svg>
+      </div>
+
+      <h1 class="elegant-title">I'm So Sorry, My Love</h1>
+      <p class="romantic-subtitle">No amount of miles can keep my heart away from yours ✈️💕</p>
+
+      <!-- Sweet heart divider -->
+      <div class="heart-divider">
+        <svg viewBox="0 0 300 24" fill="none" class="divider-svg" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="12" x2="115" y2="12" stroke="#ff7a90" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round"/>
+          <path d="M150 16 C150 10 144 10 144 16 C144 22 150 26 150 26 C150 26 156 22 156 16 C156 10 150 10 150 16Z" fill="#ff4d6d" stroke="#ff7a90" stroke-width="2"/>
+          <line x1="185" y1="12" x2="300" y2="12" stroke="#ff7a90" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="content-grid">
+
+      <!-- Left Column: Adorable Letter Card -->
+      <section class="glass-card letter-card">
+        <!-- Cute sleeping cat peaking over card -->
+        <div class="card-corner-cat">
+          <svg viewBox="0 0 60 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 50 Q10 25 30 25 Q25 15 28 5 Q35 12 40 20 Q48 18 55 25 Q58 15 60 5 Q60 50 60 50" stroke="#c5b3e6" stroke-width="2" fill="#fff"/>
+            <path d="M18 40 Q22 36 26 40" stroke="#c5b3e6" stroke-width="1.8" fill="none"/>
+            <path d="M38 40 Q42 36 46 40" stroke="#c5b3e6" stroke-width="1.8" fill="none"/>
+            <circle cx="16" cy="44" r="2" fill="#ffccd5"/>
+            <circle cx="48" cy="44" r="2" fill="#ffccd5"/>
+          </svg>
+        </div>
+
+        <h2 class="cursive-heading">A Letter From My Soul 💌</h2>
+        <div class="handwritten-letter scrollbar-styled">
+          <p class="salutation">Hello My Precious Girl,</p>
+          <p>I am writing this because my heart feels completely empty when things aren't perfect between us. I hate when there is even the tiniest misunderstanding or distance in our words, because you are my absolute safest place, my favorite person, and the center of my entire universe.</p>
+          <p>Being long-distance is one of the hardest things we face, and it hurts so much that I can't just run over to you, wrap my arms tightly around your waist, look into your beautiful eyes, and whisper how deeply sorry I am. But please know that even though we are separated by miles, my love for you has absolutely no boundaries. It grows stronger and deeper with every heartbeat.</p>
+          <p>You are worth every single mile, every countdown, and every virtual call. I promise to be a better listener, make our calls sweeter, and do everything I can to bring that glowing, gorgeous smile back to your face.</p>
+          <p>I hope this cute little website brings a warm smile to your face and shows you that no matter how far apart we are physically, my heart is always cuddled up right next to yours. 🐾💕</p>
+          <p class="sign-off">With infinite warm virtual hugs and sweet kisses,<br><span class="signature">Yours Forever & Always ❤️</span></p>
+        </div>
+      </section>
+
+      <!-- Right Column: Interactive Widgets -->
+      <div class="widgets-column">
+
+        <!-- Note Jar Section -->
+        <section class="glass-card jar-card">
+          <div class="card-header-flex">
+            <svg class="widget-icon" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            <h3 class="widget-title">Jar of Sweet Thoughts 🐾</h3>
+          </div>
+          <p class="widget-desc">Tap the cute candy jar to draw out a sweet, loving note. Each one contains a little piece of my heart. 💕</p>
+
+          <div class="jar-container" id="jarContainer" onclick="drawLoveNote()">
+            <div class="glass-jar">
+              <div class="jar-lid"></div>
+              <div class="jar-neck"></div>
+              <div class="jar-body">
+                <div class="jar-heart jh-1">💖</div>
+                <div class="jar-heart jh-2">🌸</div>
+                <div class="jar-heart jh-3">🐾</div>
+                <div class="jar-heart jh-4">🍯</div>
+                <div class="jar-heart jh-5">💖</div>
+                <div class="jar-glow-effect"></div>
+              </div>
+            </div>
+            <div class="jar-tap-prompt">Tap to Pull a Note 💌</div>
+          </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="glass-card quiz-card">
+          <svg class="quiz-cat-deco" viewBox="0 0 50 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="25" cy="25" r="18" stroke="#ff7a90" stroke-width="2.5" fill="#fff"/>
+            <path d="M12 12 L4 2 L16 10Z" stroke="#ff7a90" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+            <path d="M38 12 L46 2 L34 10Z" stroke="#ff7a90" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+            <ellipse cx="18" cy="23" rx="2" ry="3" fill="#3a2535"/>
+            <ellipse cx="32" cy="23" rx="2" ry="3" fill="#3a2535"/>
+            <path d="M22 28 Q25 31 28 28" stroke="#ff7a90" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </svg>
+
+          <h3 class="widget-title text-center">Do You Forgive Me? 🥺</h3>
+          <p class="widget-desc text-center">Pretty please? Sending you infinite kitty eyes from miles away! 🐱💕</p>
+          <div class="quiz-buttons">
+            <button class="btn btn-yes" id="btnYes" onclick="forgiveSuccess()">YES, I DO! 💖</button>
+            <button class="btn btn-no" id="btnNo" onmouseover="runawayButton(this)" onclick="runawayButton(this)">No 😿</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ========== CATCHER GAME SECTION (REPLACED COUPONS) ========== -->
+    <div class="glass-card catcher-game-card">
+      <h2 class="section-title cursive-heading text-center">🐾 Catch My Love! Catcher Game 🐾</h2>
+      <p class="section-subtitle text-center">Drag the basket (or tap the arrows) to catch falling skincare 🧴, cute cats 🐱, and lovely hearts 💖!</p>
+      
+      <!-- Scoreboard Display -->
+      <div class="catcher-scoreboard">
+        <div class="score-pill">
+          <span class="score-label">SCORE:</span>
+          <span class="score-val" id="catcherScore">0</span>
+          <span class="score-target">/ 100</span>
+        </div>
+        <div class="game-status-label" id="gameStatusText">Tap Start to Play! 🎮</div>
+      </div>
+      
+      <!-- 2D Game Arena Frame -->
+      <div class="game-arena-wrapper">
+        <div class="game-arena-container" id="gameArenaContainer">
+          <canvas id="catcherCanvas"></canvas>
+          
+          <!-- Large overlay screens -->
+          <div class="arena-overlay" id="gameStartOverlay">
+            <div class="overlay-content">
+              <span class="overlay-icon">🐱💅💖</span>
+              <h3>Capture the Love!</h3>
+              <p>Catch Moisturizers, Sheet Masks, Chibi Cats, and Red Hearts to reach 100 points! Avoid letting hearts drop! 💕</p>
+              <button class="btn btn-game-start" onclick="startGameLoop()">START GAME 🎮</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Mobile-First Touch Directional Buttons -->
+      <div class="touch-controls" id="touchControls">
+        <button class="btn btn-touch-arrow" id="btnLeft" aria-label="Move Left">◀ LEFT</button>
+        <button class="btn btn-touch-arrow" id="btnRight" aria-label="Move Right">RIGHT ▶</button>
+      </div>
+
+      <!-- Locked Victory Reward Wrapper (reveals only when game is won) -->
+      <div class="victory-wrapper" id="victoryWrapper">
+        <div class="victory-lock-overlay" id="victoryLock">
+          <div class="lock-contents">
+            <div class="lock-icon">🔒</div>
+            <h4>Locked Victory Reward</h4>
+            <p>Score 100 points in the catching game above to unlock the Grand Mystery Apology Pass! 🎁🐾</p>
+          </div>
+        </div>
+        
+        <!-- Ultimate Apology Pass Reward Card -->
+        <div class="unlocked-pass-card" id="victoryRewardCard">
+          <div class="pass-sparkle-1">✨</div>
+          <div class="pass-sparkle-2">✨</div>
+          <div class="pass-cat-header">
+            <svg viewBox="0 0 100 80" fill="none" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="45" r="22" stroke="#ff4d6d" stroke-width="2.5" fill="#fff"/>
+              <path d="M30 25 L22 8 L38 20Z" stroke="#ff4d6d" stroke-width="2.5" fill="#fff" stroke-linejoin="round"/>
+              <path d="M70 25 L78 8 L62 20Z" stroke="#ff4d6d" stroke-width="2.5" fill="#fff" stroke-linejoin="round"/>
+              <ellipse cx="40" cy="42" rx="2.5" ry="3" fill="#3a2535"/>
+              <ellipse cx="60" cy="42" rx="2.5" ry="3" fill="#3a2535"/>
+              <circle cx="39" cy="40.5" r="0.8" fill="#fff"/>
+              <circle cx="59" cy="40.5" r="0.8" fill="#fff"/>
+              <path d="M47 48 Q50 51 53 48" stroke="#ff4d6d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+              <circle cx="33" cy="46" r="2.5" fill="#ffccd5"/>
+              <circle cx="67" cy="46" r="2.5" fill="#ffccd5"/>
+            </svg>
+          </div>
+          
+          <div class="pass-header">
+            <span class="pass-badge">✨ INFINITE ULTIMATE APOLOGY PASS ✨</span>
+            <span class="pass-serial">TICKET ID: #LDR-REUNITED-INFINITY</span>
+          </div>
+          
+          <div class="pass-body">
+            <h3 class="pass-title">The Grand Apology & Eternal Pampering Pass 🎟️💖</h3>
+            <p class="pass-description">"This pass officially certifies that the bearer is entitled to infinite forehead kisses, continuous back scratches, synced cozy movie date nights, and surprise deliveries of delicious treats or warm coffee whenever requested across the miles! No expiration, redeemable eternally, and valid under all distance regulations!"</p>
+          </div>
+          
+          <div class="pass-footer">
+            <div class="pass-stamp-box" id="victoryPassStamp" onclick="stampVictoryPass()">
+              <span class="stamp-box-prompt">TAP TO STAMP 🐾</span>
+              <div class="pass-rubber-stamp">REDEEMED</div>
+            </div>
+            <div class="pass-signature">
+              <span class="signature-title">Signed by your kitty:</span>
+              <span class="signature-val">Your Love ❤️</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="paw-trail">
+        <svg class="paw-foot s" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="28" r="8" fill="#ffccd5"/><circle cx="10" cy="16" r="4" fill="#ffccd5"/><circle cx="20" cy="12" r="4" fill="#ffccd5"/><circle cx="30" cy="16" r="4" fill="#ffccd5"/></svg>
+        <svg class="paw-foot" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="28" r="8" fill="#ffccd5"/><circle cx="10" cy="16" r="4" fill="#ffccd5"/><circle cx="20" cy="12" r="4" fill="#ffccd5"/><circle cx="30" cy="16" r="4" fill="#ffccd5"/></svg>
+        <svg class="paw-foot" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="28" r="8" fill="#ffccd5"/><circle cx="10" cy="16" r="4" fill="#ffccd5"/><circle cx="20" cy="12" r="4" fill="#ffccd5"/><circle cx="30" cy="16" r="4" fill="#ffccd5"/></svg>
+      </div>
+      <p class="footer-text">Made with lots of 🐱💕 across the miles — because love has no distance limit</p>
+    </footer>
+
+  </main>
+
+  <!-- MODAL 1: Love Note Draw -->
+  <div class="modal-overlay" id="noteModal" onclick="closeNoteModal()">
+    <div class="love-note-modal" onclick="event.stopPropagation()">
+      <div class="note-paper">
+        <!-- Cute cat peeking over the paper -->
+        <svg class="note-cat" viewBox="0 0 80 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="40" cy="38" r="20" stroke="#ff7a90" stroke-width="2" fill="#fff"/>
+          <path d="M26 25 L18 10 L30 22Z" stroke="#ff7a90" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+          <path d="M54 25 L62 10 L50 22Z" stroke="#ff7a90" stroke-width="2" fill="#fff" stroke-linejoin="round"/>
+          <ellipse cx="32" cy="35" rx="1.5" fill="#3a2535"/>
+          <ellipse cx="48" cy="35" rx="1.5" fill="#3a2535"/>
+          <path d="M37 40 Q40 43 43 40" stroke="#ff7a90" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="note-heart-accent">💖</div>
+        <h4 class="cursive note-salutation">A sweet thought...</h4>
+        <p class="note-text" id="noteModalText">Pulling sweet thoughts from my heart...</p>
+        <button class="btn btn-close-note" onclick="closeNoteModal()">Put Note Back 🐾</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Success Forgive -->
+  <div class="modal-overlay success-modal-overlay" id="successModal">
+    <div class="success-card" onclick="event.stopPropagation()">
+      <!-- Adorable happy jumping cat -->
+      <svg class="success-cat" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="55" r="28" stroke="#ff7a90" stroke-width="3" fill="#fff"/>
+        <path d="M40 38 L30 18 L50 34Z" stroke="#ff7a90" stroke-width="2.5" fill="#fff" stroke-linejoin="round"/>
+        <path d="M80 38 L90 18 L70 34Z" stroke="#ff7a90" stroke-width="2.5" fill="#fff" stroke-linejoin="round"/>
+        <!-- Joyful arc eyes -->
+        <path d="M44 50 Q50 44 50 50" stroke="#ff7a90" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M70 50 Q70 44 76 50" stroke="#ff7a90" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- Big happy smile -->
+        <path d="M50 63 Q60 74 70 63" fill="#ff7a90" stroke="#ff7a90" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Hearts flying -->
+        <path d="M22 24 C22 20 18 20 18 24 C18 28 22 31 22 31 C22 31 26 28 26 24 C26 20 22 20 22 24Z" fill="#ff4d6d"/>
+        <path d="M98 24 C98 20 94 20 94 24 C94 28 98 31 98 31 C98 31 102 28 102 24 C102 20 98 20 98 24Z" fill="#c5b3e6"/>
+      </svg>
+
+      <div class="success-heart-blast">💝</div>
+      <h2 class="cursive success-title">Yay! I Am Forgiven!</h2>
+      <p class="success-message">You've officially made me the absolute happiest person in the world! I promise to love you extra hard every single day and count down every second until we're reunited! 🐱💕✈️</p>
+
+      <div class="special-reward-card">
+        <div class="reward-title">🐾 ULTIMATE GRAND REUNION TICKET 🐾</div>
+        <p class="reward-desc">"A Full Weekend of Royal Dates, Sweet Breakfast in Bed, & Continuous Pampering — Triggered The Exact Second We Meet!"</p>
+        <div class="reward-code">SECRET PASSCODE: REUNITED-FOREVER-🐱💕</div>
+      </div>
+
+      <button class="btn btn-success-close" onclick="closeSuccessModal()">Keep Smiling! 🐾✨</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
